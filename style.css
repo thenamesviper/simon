@@ -1,0 +1,164 @@
+#container {
+    width: 220px;
+    height: 220px;
+    margin: auto;
+    margin-top: 50px;
+    text-align: center;
+    background-color: black;
+    border-radius: 100%;
+    box-sizing: border-box;
+}
+
+.wedge {
+    height: 100px;
+    width: 100px;
+    float: left;
+    margin: 5px;
+}
+
+#green {
+    background-color: green;
+    border-radius: 100px 0 0 0;
+}
+
+#green:hover {
+    background-color: #33ff33
+}
+
+#red {
+    background-color: #990000;
+    border-radius: 0 100px 0 0;
+}
+
+#red:hover {
+    background-color: red;
+}
+
+#blue {
+    background-color: #000055;
+    border-radius: 0 0 0 100px;
+}
+#blue:hover {
+    background-color: blue;
+}
+
+#yellow {
+    background-color: #aaaa33;
+    border-radius: 0 0 100px 0;
+}
+#yellow:hover {
+    background-color: yellow;
+}
+
+#middle {
+    color: white;
+    -moz-user-select: none;
+        -ms-user-select: none;
+        -webkit-user-select: none;
+}
+
+@media(max-width: 499px) {
+   h1 {
+       color: black;
+   }
+   #counter, #reset, #start, #strict {
+        background-color: black;
+        color: white;
+        padding: 15px;
+        margin-top: 10px;
+    }
+    #is-strict, #is-not-strict {
+        width: 50%;
+        float: left;
+        padding-bottom: 5px;
+    }
+    .active {
+        color: yellow;
+    }
+}
+@media(min-width: 500px){
+    #container {
+        transform: scale(2.5,2.5) translateY(50px);
+    }
+    #middle {
+        z-index: 100;
+        position: absolute;
+        left: 27.5%;
+        top: 27.5%;
+        width: 100px;
+        height: 100px;
+        background-color: black;
+        border-radius: 100%;
+       
+    }
+    #container h1 {
+        padding: 10%
+    }
+    sup {
+        font-size: 7px;
+        vertical-align: top;
+    }
+    #counter {
+        text-align: center;
+    }
+    #counter, #reset, #start{
+    font-size: 6px;
+    width: 31%;
+    margin: 1px;
+    float: left;
+    }
+    
+    #count{
+        width: 15px;
+        height: 10px;
+        border-radius: 20%;
+        margin: auto;
+        background-color: #000055;
+        color: white;
+        line-height: 10px;
+        font-weight: bold;
+    }
+    .button {
+        text-align: center;
+        width: 10px;
+        height: 10px;
+        margin: auto;
+        border-radius: 40%;
+        cursor: pointer;
+    }
+    .start {
+        background-color: green;
+    }
+    .reset { 
+        background-color: #990000;
+    }
+    #strict {
+        text-align: center;
+        width: 100px;
+        font-size: 6px;
+        margin-top: 30px;
+        margin-left: 15px;
+        color: #aaaa33;
+    }
+    #is-strict, #is-not-strict, #strict>p {
+        margin: auto;
+        width: 20px;
+        height: 7px;
+        line-height: 7px;
+        float: left;
+    }
+   .active {
+      background-color: #aaaa33;
+      color: black;
+   }
+   .inactive {
+       cursor: pointer;
+   }
+}
+
+@media (min-width: 900px) {
+    #container {
+        transform: scale(4,4) translateY(75px);
+    }
+}
+

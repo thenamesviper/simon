@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<head>
+    <title>Simon Game</title>
+    <meta charset = "UTF-8" lang = "en">
+    <link rel = "stylesheet" href = "reset.css">
+    <link rel = "stylesheet" href = "style.css">
+</head>
+<body>
+    <div id = "container">
+        <div id = "green" class = "wedge"></div>
+        <div id = "red" class = "wedge"></div>
+        <div id = "blue" class = "wedge"></div>
+        <div id = "yellow" class = "wedge"></div>
+        <div id = "middle">
+            <h1>Simon<sup>&reg;</sup></h1>
+            <div id = "counter">
+                <div id = "count">00</div>
+                <p>Count</p>
+            </div>
+            <div id = "reset">
+                <div class = "reset button"></div>
+                <p>Reset</p>
+            </div>
+            <div id = "start">
+                <div class  = "start button"></div>
+                <p>Start</p>
+            </div>
+            <div id = "strict">
+                <p>Strict:</p>
+                <div id = "is-strict" class = "inactive">ON</div>
+                <div id = "is-not-strict" class = "active">OFF</div>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src = "simon.js"></script>
+</body>
