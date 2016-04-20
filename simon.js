@@ -1,25 +1,34 @@
+//TODO: fix upper divs detection area being off..thought it was the h1,
+//but working with it didn't help
+// basic cleanup, use OOP in the future...
+
 $(document).ready(startup);
 
-let colorLoopInterval;
+let colorLoopInterval, repeatAfterWait;
 let totalCount;
 let correctArray;
 
 function startup() {
-    setupStrictness();
+    setupSources();
     setupStart();
 }
 
-function setupStrictness() {
-    
+function setupSources() {
+   $("#sources").click(function() {
+       $("#sources-popup").toggleClass("sources-hidden");
+   })
 }
-
 //happens initially and after reset clicked
 function setupStart() {
     $(".start").removeClass("not-clickable");
+    $(".reset").addClass("not-clickable");
+    $("#count").text("0");
+    allowStrictChange();
+    
     $("#start").on("click", function() {
+        disallowStrictChange();
         totalCount = 1;
         correctArray = generateRandomArray();
-        $("#is-strict, #is-not-strict, #strict").addClass("strict-not-clickable");
         $(".start").addClass("not-clickable");
         $("#start").off("click");
         setupReset();
@@ -30,13 +39,36 @@ function setupStart() {
 function setupReset() {
     $(".reset").removeClass("not-clickable");
     $("#reset p").text("Reset");
+    
     $("#reset").on("click", function () {
+        $("#winner").css("display", "none");
         $(".reset").addClass("not-clickable");
-        $("#is-strict, #is-not-strict, #strict").removeClass("strict-not-clickable");
+        $("#count").text("1");
         $("#reset").off("click");
         clearInterval(colorLoopInterval);
         setupStart();
     })
+}
+//two following functions and corresponding html/css should be cleaned up
+
+//switches between two options visually, as well as having only one as "active"
+//this class distinction is important when looking at failures in allowClick()
+function allowStrictChange() {
+    $("#is-strict, #is-not-strict, #strict").removeClass("strict-not-clickable");
+    $("#is-strict, #is-not-strict").on("click", function() {
+        if($(this).hasClass("active")) {
+            $(".inactive").removeClass("inactive").addClass("active");
+            $(this).removeClass("active").addClass("inactive");
+        } else {
+            $(".active").removeClass("active").addClass("inactive");
+            $(this).removeClass("inactive").addClass("active");
+        }
+    })
+}
+
+function disallowStrictChange() {
+    $("#is-strict, #is-not-strict").off("click");
+    $("#is-strict, #is-not-strict, #strict").addClass("strict-not-clickable");
 }
 
 function generateRandomArray() {
@@ -50,21 +82,18 @@ function generateRandomArray() {
 
 function startSequence() {
     clearInterval(colorLoopInterval);
-    console.log("startSequence count" + totalCount);
     loopColors(correctArray.slice(0, totalCount))
 }
 
 function loopColors(partialArray) {
-    console.log(partialArray);
     let count = 1;
     $("#count").text(totalCount);
     
     //gives decent increasing difficulty  
-    let delayTime = 400*Math.log(23-partialArray.length);
+    let delayTime = 200*Math.log(23-partialArray.length);
     
     colorLoopInterval = setInterval(function() {
-        console.log("small count" + count);
-        console.log("startloop count" + totalCount);
+        
        disallowClick();
        wedgeSelected(partialArray[count-1], delayTime);
        if(count  == partialArray.length) {
@@ -114,21 +143,30 @@ function getSound(color){
 function awaitAnswers(gameArray, slicedArray) {
     clearInterval(colorLoopInterval);
     allowClick(gameArray, slicedArray);
-    loopColors(gameArray);
+    
+    //no input after 2 secs leads to repeat of sequence
+    repeatAfterWait = setTimeout(function() {
+        loopColors(gameArray)}
+      , 2000)
 }
 
 function allowClick(gameArray, slicedArray) {
     setupReset();
-    console.log("allowclickcount: " + totalCount);
     $(".wedge").on("click", function(evt) {
+        
         //prevents bubbling up
         evt.stopImmediatePropagation();
-        console.log($(this).attr("id") + " wedge clicked");
+        clearTimeout(repeatAfterWait);
         clearInterval(colorLoopInterval);
         let correct = $(this).attr("id") == slicedArray[0] ? true : false;
         if(!correct) {
-            clickEffects($(this).attr("id"), false);
-            loopColors(gameArray);
+            clickEffects($(this).attr("id"), false); 
+            //strict mode results in restart w/ new array
+            if($("#is-strict").hasClass("active")) {
+                return setupStart();
+            } else {
+                loopColors(gameArray);
+            }
         } else {
             clickEffects($(this).attr("id"), true);
             slicedArray = slicedArray.slice(1);
@@ -142,7 +180,7 @@ function disallowClick(){
     $(".wedge").off("click");
     $("#reset").off("click");
     $(".reset").addClass("not-clickable");
-    $("#reset p").text("Listen");
+    $("#reset p").text("Playing");
 }
 
 //flashes color and sound
@@ -158,9 +196,17 @@ function clickEffects(color, bool) {
 }
 
 function sequenceComplete(arr) {
-    console.log("completedCount:" + totalCount);
     disallowClick();
     clearInterval(colorLoopInterval);
     totalCount ++;
-    startSequence(correctArray);
+    totalCount == 21 ? endGame() : startSequence(correctArray); 
+}
+
+function endGame() {
+    setTimeout(function() {
+        let victorySound = new Audio("http://res.cloudinary.com/thenamesviper/video/upload/v1461188776/victory_zdggqx.mp3");
+        victorySound.play();
+        $("#winner").css("display", "initial");
+        setupReset();
+    },1000);
 }
