@@ -1,3 +1,6 @@
+body {
+    background-color: dimgray;
+}
 #container {
     width: 220px;
     height: 220px;
@@ -21,33 +24,19 @@
     border-radius: 100px 0 0 0;
 }
 
-#green:hover {
-    background-color: #33ff33
-}
-
 #red {
     background-color: #990000;
     border-radius: 0 100px 0 0;
-}
-
-#red:hover {
-    background-color: red;
 }
 
 #blue {
     background-color: #000055;
     border-radius: 0 0 0 100px;
 }
-#blue:hover {
-    background-color: blue;
-}
 
 #yellow {
     background-color: #aaaa33;
     border-radius: 0 0 100px 0;
-}
-#yellow:hover {
-    background-color: yellow;
 }
 
 #middle {
@@ -57,7 +46,17 @@
         -webkit-user-select: none;
 }
 
-@media(max-width: 499px) {
+.not-clickable {
+    cursor: default;
+    background: gray !important;
+}
+
+.strict-not-clickable {
+    color: gray !important;
+}
+
+
+@media(max-width: 549px) {
    h1 {
        color: black;
    }
@@ -76,7 +75,7 @@
         color: yellow;
     }
 }
-@media(min-width: 500px){
+@media(min-width: 550px){
     #container {
         transform: scale(2.5,2.5) translateY(50px);
     }
@@ -89,10 +88,16 @@
         height: 100px;
         background-color: black;
         border-radius: 100%;
-       
     }
-    #container h1 {
-        padding: 10%
+    
+    #middle h1 {
+        display: inline-block;
+        width: 70px;
+        margin-top: 20%;
+    }
+    
+    #middle p {
+        margin-top: 2px;
     }
     sup {
         font-size: 7px;
@@ -118,7 +123,7 @@
         line-height: 10px;
         font-weight: bold;
     }
-    .button {
+    .play {
         text-align: center;
         width: 10px;
         height: 10px;
@@ -131,6 +136,10 @@
     }
     .reset { 
         background-color: #990000;
+    }
+    
+    .wedge {
+        cursor: pointer;
     }
     #strict {
         text-align: center;
