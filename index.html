@@ -4,7 +4,9 @@
     <meta charset = "UTF-8" lang = "en">
     <link rel = "stylesheet" href = "reset.css">
     <link rel = "stylesheet" href = "style.css">
+ 
 </head>
+
 <body>
     <div id = "winner">You Won!</div>
     <div id = "container">
@@ -15,7 +17,7 @@
         <div id = "middle">
             <h1>Simon<sup>&reg;</sup></h1>
             <div id = "counter">
-                <div id = "count">00</div>
+                <div id = "count">0</div>
                 <p>Count</p>
             </div>
             <div id = "reset">
@@ -32,7 +34,22 @@
                 <div id = "is-not-strict" class = "active">OFF</div>
             </div>
         </div>
+        <div id = "footer">
+            <a href = "http://codepen.io/thenamesviper/pen/grWNeJ">Portfolio</a>
+            <a href = "#" id = "sources">Sources</a>
+        </div>
     </div>
+    <div id = "sources-popup" class = "sources-hidden">
+        <p>Simon game by Milton Bradley/Hasbro<br>
+           Designed for educational purposes only<br>
+           Correct wedge sounds from FreeCodeCamp.<br> 
+           Incorrect sound open source from user RICHERlandTV @ https://www.freesound.org/people/RICHERlandTV/sounds/216090/<br>
+           Victory sound made in FL Studio 11.<br>   
+           Coded in Visual Studio Code.
+    </div>
+    
+        
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src = "simon.js"></script>
+
 </body>

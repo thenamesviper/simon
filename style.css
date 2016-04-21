@@ -2,6 +2,18 @@ body {
     background-color: dimgray;
 }
 
+#winner {
+    background-color: white;
+    position: absolute;
+    width: 50%;
+    top: 20px;
+    left: 25%;
+    right: 25%;
+    text-align: center;
+    display: none;
+    padding: 10px;
+    z-index: 1000;
+}
 #container {
     width: 220px;
     height: 220px;
@@ -56,6 +68,27 @@ body {
     color: gray !important;
 }
 
+#footer {
+    display: inline;
+    font-size: 14px;
+}
+#footer a, #footer div {
+    text-decoration: none;
+    color: black;
+    border-radius: 2px;
+    background-color: white;
+    padding: 2px;
+}
+#sources-popup {
+    position: absolute;
+    bottom: 10%;
+    padding: 5px;
+    background-color: white;
+}
+
+.sources-hidden {
+    display: none !important;
+}
 
 @media(max-width: 549px) {
    h1 {
@@ -75,8 +108,17 @@ body {
     .active {
         color: yellow;
     }
+  #sources-popup {
+    font-size: 10px;
+  }
 }
 @media(min-width: 550px){
+    #winner {
+        top: 100px;
+        font-size: 64px;
+        box-shadow: 2px 5px black;
+        
+    }
     #container {
         transform: scale(2.5,2.5) translateY(50px);
     }
@@ -163,6 +205,13 @@ body {
    }
    .inactive {
        cursor: pointer;
+   }
+   #footer {
+       font-size: 6px;
+       margin: auto;
+   }
+   #sources-popup {
+       left: 25%;
    }
 }
 
