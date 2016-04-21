@@ -1,3 +1,4 @@
+//TODO: fix upper divs detection area being off..thought it was the h1,
 $(document).ready(startup);
 
 let colorLoopInterval;
